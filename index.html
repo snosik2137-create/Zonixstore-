@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="zonixstore — жидкости для вейпа с доставкой по Европе. Заказ через Telegram.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0b0b1a">
+<title>zonixstore — Жидкости для вейпа</title>
+<style>
+:root{
+  --primary:#1a1a2e; --secondary:#16213e; --accent:#0f3460; --highlight:#e94560;
+  --violet:#7b4dff; --light:#f5f5f7; --dark:#0b0b1a; --gray:#6c757d;
+  --success:#28a745; --danger:#dc3545; --radius:16px;
+  --shadow:0 6px 24px rgba(15,20,50,.10); --transition:all .3s ease;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(233,69,96,.08),transparent 40%),
+    radial-gradient(circle at 90% 30%,rgba(123,77,255,.08),transparent 40%),
+    linear-gradient(135deg,var(--light),#ececf1);
+  background-attachment:fixed;
+  color:var(--dark);line-height:1.6;min-height:100vh;overflow-x:hidden;
+}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+
+/* ---------- Header ---------- */
+header{
+  background:rgba(255,255,255,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 2px 20px rgba(0,0,0,.07);position:fixed;width:100%;top:0;z-index:1000;
+}
+.header-container{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;max-width:1200px;margin:0 auto}
+.logo{font-size:27px;font-weight:800;color:var(--primary);text-decoration:none;display:flex;align-items:center;gap:10px;user-select:none;-webkit-user-select:none;letter-spacing:-.5px}
+.logo .ic{color:var(--highlight);font-size:30px;filter:drop-shadow(0 0 8px rgba(233,69,96,.5));animation:floaty 4s ease-in-out infinite}
+.nav-menu{display:flex;list-style:none;gap:30px}
+.nav-menu a{text-decoration:none;color:var(--dark);font-weight:600;transition:var(--transition);position:relative;padding:4px 0}
+.nav-menu a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--highlight);transition:width .3s}
+.nav-menu a:hover{color:var(--highlight)}
+.nav-menu a:hover::after{width:100%}
+.header-actions{display:flex;align-items:center;gap:14px}
+.burger{display:none;background:none;border:none;font-size:24px;color:var(--primary);cursor:pointer}
+.cart-icon{
+  position:relative;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;
+  width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);border:none;font-size:16px
+}
+.cart-icon:hover{transform:translateY(-3px) scale(1.05)}
+.cart-icon.bump{animation:bump .4s}
+.cart-count{position:absolute;top:-5px;right:-5px;background:var(--highlight);color:#fff;min-width:22px;height:22px;padding:0 5px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;padding:170px 0 110px;margin-top:0;color:#fff;text-align:center;
+  background:linear-gradient(130deg,#0b0b1a,#1a1a2e 40%,#2a1650 70%,#16213e);
+  background-size:300% 300%;animation:gradMove 14s ease infinite;
+}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;z-index:0}
+.hero::before{width:380px;height:380px;background:var(--highlight);top:-120px;left:-100px;animation:floaty 9s ease-in-out infinite}
+.hero::after{width:420px;height:420px;background:var(--violet);bottom:-160px;right:-120px;animation:floaty 11s ease-in-out infinite reverse}
+.hero .container{position:relative;z-index:2}
+.hero h1{font-size:3.4rem;margin-bottom:20px;line-height:1.15;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+.hero h1 span{background:linear-gradient(90deg,#ff6b88,#b794ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.2rem;max-width:700px;margin:0 auto 32px;opacity:.92}
+.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px}
+.hero-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:8px 16px;border-radius:30px;font-size:.9rem}
+.hero-badge .ic{color:#ff6b88;margin-right:6px}
+.float-emoji{position:absolute;z-index:1;font-size:46px;opacity:.28;animation:floaty 7s ease-in-out infinite;pointer-events:none}
+.btn{
+  display:inline-block;background:linear-gradient(135deg,var(--highlight),#ff6b88);color:#fff;padding:13px 30px;border-radius:30px;
+  text-decoration:none;font-weight:700;transition:var(--transition);border:none;cursor:pointer;box-shadow:0 6px 18px rgba(233,69,96,.35);margin:5px;font-size:1rem
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(233,69,96,.5)}
+.btn-secondary{background:transparent;border:2px solid #fff;box-shadow:none}
+.btn-secondary:hover{background:#fff;color:var(--primary);box-shadow:none}
+.btn-dark-outline{background:transparent;border:2px solid var(--gray);color:var(--gray);box-shadow:none}
+.btn-dark-outline:hover{background:var(--gray);color:#fff;box-shadow:none}
+
+/* ---------- Sections ---------- */
+.section-title{text-align:center;margin:70px 0 40px;font-size:2.4rem;color:var(--primary);letter-spacing:-.5px}
+.section-title::after{content:'';display:block;width:80px;height:4px;background:linear-gradient(90deg,var(--highlight),var(--violet));margin:12px auto 0;border-radius:2px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:28px;margin-bottom:60px}
+.product-card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);
+  display:flex;flex-direction:column;position:relative;border:1px solid rgba(0,0,0,.04)
+}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 18px 36px rgba(15,20,50,.16)}
+.product-card.out-of-stock{opacity:.62}
+.product-card.out-of-stock .product-image{filter:grayscale(100%)}
+.stock-badge{position:absolute;top:12px;right:12px;padding:5px 11px;border-radius:15px;font-size:11px;font-weight:700;z-index:10;color:#fff}
+.stock-badge.in-stock{background:var(--success)}
+.stock-badge.low{background:#ffc107;color:#000}
+.stock-badge.out-of-stock{background:var(--danger)}
+.product-image{height:190px;position:relative;background:linear-gradient(135deg,#f7f3ff,#ffeef2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-image::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(233,69,96,.15),transparent 70%)}
+.product-emoji{font-size:80px;line-height:1;position:relative;z-index:1;transition:transform .4s}
+.product-card:hover .product-emoji{transform:scale(1.15) rotate(-6deg)}
+.product-info{padding:20px;flex-grow:1;display:flex;flex-direction:column}
+.product-title{font-size:1.25rem;margin-bottom:8px;color:var(--primary)}
+.product-description{color:var(--gray);margin-bottom:14px;flex-grow:1;font-size:.95rem}
+.product-price{font-size:1.5rem;font-weight:800;color:var(--highlight);margin-bottom:14px}
+.add-to-cart{
+  background:var(--primary);color:#fff;border:none;padding:11px 20px;border-radius:30px;cursor:pointer;font-weight:700;transition:var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:8px;margin-top:auto;font-size:.95rem
+}
+.add-to-cart:hover{background:var(--accent);transform:translateY(-2px)}
+.add-to-cart:disabled{background:#ccc;cursor:not-allowed;transform:none}
+
+/* ---------- Cart ---------- */
+.cart-section{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);margin:0 0 60px}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid #eee;gap:10px}
+.cart-title{font-size:1.7rem;color:var(--primary)}
+.cart-item{display:flex;align-items:center;padding:15px 0;border-bottom:1px solid #eee;gap:16px}
+.cart-item:last-child{border-bottom:none}
+.cart-item-image{width:72px;height:72px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#f5f5f7;font-size:38px;flex-shrink:0}
+.cart-item-details{flex-grow:1;min-width:0}
+.cart-item-name{font-weight:700;margin-bottom:3px;color:var(--primary)}
+.cart-item-price{color:var(--highlight);font-weight:700}
+.cart-item-quantity{display:flex;align-items:center;margin-top:8px}
+.quantity-btn{width:32px;height:32px;background:var(--light);border:none;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);font-size:16px}
+.quantity-btn:hover{background:var(--primary);color:#fff}
+.quantity-value{margin:0 14px;font-weight:700;min-width:18px;text-align:center}
+.remove-item{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1.15rem;transition:var(--transition);padding:8px}
+.remove-item:hover{transform:scale(1.2)}
+.cart-summary{display:flex;justify-content:space-between;align-items:center;padding-top:20px;margin-top:10px;border-top:1px solid #eee;gap:16px}
+.cart-total{font-size:1.5rem;font-weight:800;color:var(--primary)}
+.checkout-btn{background:linear-gradient(135deg,#28a745,#20c997);color:#fff;border:none;padding:13px 32px;border-radius:30px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 6px 18px rgba(40,167,69,.35)}
+.checkout-btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(40,167,69,.45)}
+.checkout-btn:disabled{background:var(--gray);cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ---------- Telegram ---------- */
+.telegram-section{background:linear-gradient(135deg,var(--primary),var(--secondary) 60%,#2a1650);color:#fff;padding:70px 0;text-align:center;margin:60px 0;position:relative;overflow:hidden}
+.telegram-title{font-size:2rem;margin-bottom:10px}
+.telegram-sub{opacity:.8;margin-bottom:30px}
+.telegram-contacts{display:flex;justify-content:center;flex-wrap:wrap;gap:28px}
+.telegram-contact{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:24px 20px;border-radius:var(--radius);width:270px;backdrop-filter:blur(10px);transition:var(--transition);cursor:pointer}
+.telegram-contact:hover{transform:translateY(-6px);background:rgba(255,255,255,.18)}
+.telegram-icon{font-size:2.5rem;margin-bottom:12px;color:#ff6b88}
+.telegram-name{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.telegram-desc{font-size:.9rem;opacity:.85;margin-bottom:16px}
+.telegram-link{color:#fff;text-decoration:none;font-weight:700;display:inline-block;padding:9px 20px;background:var(--highlight);border-radius:20px;transition:var(--transition)}
+.telegram-link:hover{background:#d63849;transform:translateY(-2px)}
+.contacts-card{padding:36px 30px;margin-bottom:60px}
+.contacts-card .telegram-contact{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
+.contacts-card>p{text-align:center;color:var(--gray)}
+.contacts-card .telegram-contacts{margin-top:22px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--dark);color:#fff;padding:50px 0 20px;margin-top:40px}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;margin-bottom:36px}
+.footer-column h3{font-size:1.25rem;margin-bottom:18px;position:relative;padding-bottom:10px}
+.footer-column h3::after{content:'';position:absolute;width:50px;height:3px;background:var(--highlight);bottom:0;left:0}
+.footer-column p{color:#bbb}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:10px;color:#ccc}
+.footer-links a{color:#ccc;text-decoration:none;transition:var(--transition)}
+.footer-links a:hover{color:var(--highlight);padding-left:5px}
+.social-links{display:flex;gap:14px;margin-top:20px}
+.social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:50%;transition:var(--transition);color:#fff}
+.social-links a:hover{background:var(--highlight);transform:translateY(-3px)}
+.copyright{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.9rem;color:#aaa}
+
+/* ---------- Toast / Modals ---------- */
+.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--primary);color:#fff;padding:13px 24px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:all .3s;z-index:6000;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(8,8,24,.72);backdrop-filter:blur(4px);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex;animation:fadeIn .25s}
+.modal-box{background:#fff;border-radius:var(--radius);padding:30px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.35);animation:popIn .3s}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #eee}
+.modal-title{font-size:1.4rem;font-weight:800;color:var(--primary)}
+.close-modal{background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray)}
+.close-modal:hover{color:var(--danger)}
+.field-label{display:block;font-weight:700;margin-bottom:6px;color:var(--primary);font-size:.95rem}
+.field{width:100%;padding:12px 14px;border:1.5px solid #ddd;border-radius:10px;font-size:16px;margin-bottom:14px;font-family:inherit;transition:var(--transition)}
+.field:focus{outline:none;border-color:var(--highlight);box-shadow:0 0 0 3px rgba(233,69,96,.15)}
+.route-info{display:flex;gap:10px;align-items:flex-start;background:#f5f3ff;border:1px solid #e1d9ff;color:var(--primary);padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:.92rem}
+.route-info .ic{color:var(--violet);margin-top:3px}
+.order-summary{background:#fafafa;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:.92rem;max-height:150px;overflow-y:auto}
+.order-summary div{display:flex;justify-content:space-between;gap:10px;padding:2px 0}
+.order-summary .sum-total{border-top:1px solid #e5e5e5;margin-top:6px;padding-top:6px;font-weight:800}
+.save-btn{background:linear-gradient(135deg,#28a745,#20c997);color:#fff;border:none;padding:13px 20px;border-radius:12px;font-weight:700;cursor:pointer;transition:var(--transition);margin-top:6px;width:100%;font-size:1rem}
+.save-btn:hover{transform:translateY(-2px)}
+.admin-form{display:flex;flex-direction:column}
+.admin-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;gap:10px}
+.admin-item:last-child{border-bottom:none}
+.admin-item-name{font-weight:600;color:var(--primary);font-size:.95rem}
+.admin-item-input{width:80px;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:15px;text-align:center}
+.admin-item-input:focus{outline:none;border-color:var(--highlight)}
+.age-box{text-align:center}
+.age-box h2{font-size:1.8rem;color:var(--primary);margin-bottom:12px}
+.age-box p{color:var(--gray);margin-bottom:20px}
+.age-box .btn{width:100%;margin:5px 0}
+
+/* ---------- Search / filters ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}
+.search-box{position:relative;flex:1 1 260px}
+.search-box .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gray);pointer-events:none}
+.search-box input{width:100%;padding:13px 16px 13px 42px;border:1.5px solid #ddd;border-radius:30px;font-size:16px;background:#fff;font-family:inherit;transition:var(--transition)}
+.search-box input:focus{outline:none;border-color:var(--highlight);box-shadow:0 0 0 3px rgba(233,69,96,.15)}
+.sort-select{padding:13px 18px;border:1.5px solid #ddd;border-radius:30px;background:#fff;font-size:15px;font-family:inherit;cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{background:#fff;border:1.5px solid #e2e2ea;color:var(--primary);padding:8px 16px;border-radius:30px;cursor:pointer;font-weight:600;font-size:.92rem;transition:var(--transition)}
+.chip:hover{border-color:var(--highlight);color:var(--highlight)}
+.chip.active{background:linear-gradient(135deg,var(--primary),var(--accent));border-color:transparent;color:#fff}
+.result-info{color:var(--gray);font-size:.9rem;margin-bottom:20px}
+.empty-state{grid-column:1/-1;text-align:center;padding:50px 20px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);color:var(--gray)}
+.empty-state .big{font-size:56px;margin-bottom:8px}
+.empty-state button{margin-top:14px}
+
+/* ---------- Card extras ---------- */
+.fav-btn{position:absolute;top:10px;left:10px;z-index:10;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:#999;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12);transition:var(--transition);font-size:15px}
+.fav-btn:hover{transform:scale(1.12);color:var(--highlight)}
+.fav-btn.on{color:var(--highlight)}
+.product-image,.product-title{cursor:pointer}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px}
+.price-row .product-price{margin-bottom:0}
+.quick-btn{background:none;border:none;color:var(--violet);font-weight:700;cursor:pointer;font-size:.88rem;padding:4px 0}
+.quick-btn:hover{text-decoration:underline}
+
+/* ---------- Quick view ---------- */
+.qv-emoji{font-size:110px;text-align:center;background:linear-gradient(135deg,#f7f3ff,#ffeef2);border-radius:var(--radius);padding:20px 0;margin-bottom:18px;line-height:1.1}
+.qv-tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.qv-tag{background:#f1efff;color:var(--violet);padding:4px 12px;border-radius:20px;font-size:.82rem;font-weight:700}
+.qv-tag.ok{background:#e6f6ea;color:#1e7e34}
+.qv-tag.low{background:#fff4d6;color:#8a6500}
+.qv-tag.no{background:#fde8ea;color:#b02a37}
+.qv-price{font-size:1.8rem;font-weight:800;color:var(--highlight);margin:6px 0 14px}
+.qv-actions{display:flex;gap:10px}
+.qv-actions .save-btn{margin-top:0;flex:1}
+.qv-actions .save-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
+.qv-fav{width:50px;border-radius:12px;border:1.5px solid #ddd;background:#fff;color:#999;cursor:pointer;font-size:18px;transition:var(--transition)}
+.qv-fav.on{color:var(--highlight);border-color:var(--highlight)}
+
+/* ---------- How it works / FAQ ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-bottom:60px}
+.step{background:#fff;border-radius:var(--radius);padding:26px 22px;box-shadow:var(--shadow);text-align:center;position:relative;transition:var(--transition)}
+.step:hover{transform:translateY(-6px)}
+.step-num{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--highlight),var(--violet));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.2rem}
+.step h3{color:var(--primary);margin-bottom:6px;font-size:1.1rem}
+.step p{color:var(--gray);font-size:.93rem}
+.faq{max-width:800px;margin:0 auto 60px}
+.faq details{background:#fff;border-radius:14px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.faq summary{cursor:pointer;padding:18px 22px;font-weight:700;color:var(--primary);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:1.5rem;color:var(--highlight);transition:transform .3s;flex-shrink:0}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 22px 18px;color:var(--gray)}
+
+/* ---------- Floating helpers ---------- */
+.back-top{position:fixed;right:18px;bottom:24px;width:46px;height:46px;border-radius:50%;border:none;background:var(--primary);color:#fff;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translateY(10px);transition:all .3s;z-index:900;font-size:16px}
+.back-top.show{opacity:1;pointer-events:auto;transform:none}
+.back-top:hover{background:var(--highlight)}
+.mobile-cart-bar{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:950;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;border-radius:16px;padding:14px 18px;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35);justify-content:space-between;align-items:center;gap:10px}
+.mobile-cart-bar.show{display:none}
+
+/* ---------- Animations ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes bump{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:768px){
+  .burger{display:block}
+  .nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:15px;box-shadow:var(--shadow)}
+  .nav-menu.open{display:flex}
+  .logo{font-size:22px}
+  .hero{padding:140px 0 90px}
+  .hero h1{font-size:2.4rem}
+  .section-title{font-size:2rem;margin-top:50px}
+  .cart-header{flex-direction:column;align-items:flex-start}
+  .cart-summary{flex-direction:column;align-items:stretch;text-align:center}
+  .checkout-btn{width:100%}
+  .telegram-contact{width:100%;max-width:320px}
+  .mobile-cart-bar.show{display:flex}
+  .back-top{bottom:84px;right:14px}
+  .toast{bottom:90px}
+  body{padding-bottom:70px}
+}
+@media (max-width:576px){
+  .hero h1{font-size:1.9rem}
+  .products-grid{grid-template-columns:1fr}
+  .cart-section{padding:20px}
+  .cart-item-image{width:56px;height:56px;font-size:30px}
+  .float-emoji{display:none}
+}
+
+/* =====================================================
+   ТЁМНАЯ ТЕМА + переливающийся фон + эффект капли
+   ===================================================== */
+:root{--gray:#a4a4bd;--surface:rgba(22,22,44,.86);--line:rgba(255,255,255,.09);--text:#ececf6}
+html{background:#08080f}
+body{background:none;color:var(--text);-webkit-tap-highlight-color:transparent}
+
+/* Медленно переливающийся тёмный фон */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(120deg,#08080f,#120f26,#0b1730,#1a0e2b,#08121f,#08080f);
+  background-size:400% 400%;animation:bgShift 40s ease-in-out infinite;
+}
+body::after{
+  content:'';position:fixed;inset:-20%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(40% 35% at 20% 25%,rgba(123,77,255,.16),transparent 70%),
+    radial-gradient(35% 30% at 80% 70%,rgba(233,69,96,.11),transparent 70%),
+    radial-gradient(30% 30% at 60% 15%,rgba(15,100,200,.12),transparent 70%);
+  animation:orbs 32s ease-in-out infinite alternate;
+}
+@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes orbs{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4%,-3%,0) scale(1.08)}100%{transform:translate3d(-4%,3%,0) scale(1)}}
+
+/* Шапка и меню */
+header{background:rgba(10,10,24,.8);box-shadow:0 2px 24px rgba(0,0,0,.45);border-bottom:1px solid var(--line)}
+.logo,.burger{color:#fff}
+.nav-menu a{color:var(--text)}
+.nav-menu a:hover{color:#ff6b88}
+
+/* Заголовки и текст */
+.section-title,.product-title,.cart-title,.cart-item-name,.cart-total,.modal-title,.field-label,
+.admin-item-name,.age-box h2,.step h3,.faq summary{color:#fff}
+.product-description,.step p,.faq details p,.age-box p,.contacts-card>p,.result-info,.close-modal{color:var(--gray)}
+
+/* Карточки и панели */
+.product-card,.cart-section,.step,.faq details,.empty-state{
+  background:var(--surface);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.cart-section,.empty-state{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.product-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 1px rgba(123,77,255,.4)}
+.product-card.out-of-stock{background:rgba(22,22,44,.55)}
+.product-image,.qv-emoji{background:linear-gradient(135deg,rgba(123,77,255,.2),rgba(233,69,96,.14))}
+.product-image::after{background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%)}
+.cart-item-image{background:rgba(255,255,255,.07)}
+.cart-header,.cart-item,.cart-summary,.modal-header,.admin-item,.order-summary .sum-total{border-color:var(--line)}
+.modal-box{background:#14142b;border:1px solid var(--line);color:var(--text)}
+.modal-overlay{background:rgba(4,4,12,.78)}
+.order-summary{background:rgba(255,255,255,.05)}
+.route-info{background:rgba(123,77,255,.14);border-color:rgba(123,77,255,.38);color:var(--text)}
+.route-info .ic{color:#b79bff}
+
+/* Поля ввода */
+.field,.search-box input,.sort-select,.admin-item-input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#fff}
+.field::placeholder,.search-box input::placeholder{color:#7d7d98}
+.sort-select option{background:#14142b;color:#fff}
+
+/* Кнопки и фильтры */
+.chip{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.13);color:var(--text)}
+.chip:hover{border-color:#ff6b88;color:#ff6b88}
+.chip.active{background:linear-gradient(135deg,var(--highlight),var(--violet));border-color:transparent;color:#fff}
+.quantity-btn{background:rgba(255,255,255,.09);color:#fff}
+.quantity-btn:hover{background:var(--violet)}
+.add-to-cart{background:linear-gradient(135deg,#2a2a52,#3b2a70);border:1px solid rgba(255,255,255,.1)}
+.add-to-cart:hover{background:linear-gradient(135deg,var(--violet),var(--highlight))}
+.add-to-cart:disabled,.qv-actions .save-btn:disabled{background:#2a2a3c;color:#777;border-color:transparent}
+.btn-dark-outline{border-color:rgba(255,255,255,.28);color:var(--text)}
+.btn-dark-outline:hover{background:rgba(255,255,255,.14);color:#fff}
+.quick-btn{color:#b79bff}
+.fav-btn{background:rgba(20,20,43,.88);color:#aaa}
+.qv-fav{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16)}
+.qv-tag{background:rgba(123,77,255,.22);color:#cdbbff}
+.qv-tag.ok{background:rgba(40,167,69,.2);color:#6fe08c}
+.qv-tag.low{background:rgba(255,193,7,.18);color:#ffd45e}
+.qv-tag.no{background:rgba(220,53,69,.2);color:#ff8a95}
+.toast{background:#23234a;border:1px solid var(--line)}
+footer{background:rgba(6,6,14,.88);border-top:1px solid var(--line)}
+@media (max-width:768px){
+  .nav-menu{background:#101024;border-bottom:1px solid var(--line)}
+}
+
+/* Плавная смена цвета фона при прокрутке (значение --scroll задаётся из JS: 0 вверху, 1 внизу) */
+body::before,body::after{
+  filter:hue-rotate(calc(var(--scroll,0) * 150deg));
+  transition:filter .6s ease-out;
+}
+.stock-badge{white-space:nowrap}
+
+/* Лёгкий эффект нажатия: кнопка мягко «вдавливается» и подсвечивается */
+.btn,.add-to-cart,.checkout-btn,.save-btn,.chip,.quantity-btn,.qv-fav,.fav-btn,.telegram-link,.back-top,.cart-icon,.mobile-cart-bar,.quick-btn{
+  transition:transform .18s cubic-bezier(.3,.7,.4,1),box-shadow .25s ease,background .3s ease,color .3s ease,border-color .3s ease,opacity .3s;
+}
+.btn:active,.add-to-cart:active,.checkout-btn:active,.save-btn:active,.chip:active,.quantity-btn:active,
+.qv-fav:active,.fav-btn:active,.telegram-link:active,.back-top:active,.cart-icon:active,.mobile-cart-bar:active{
+  transform:scale(.95)!important;
+  box-shadow:0 0 0 4px rgba(183,155,255,.22),0 4px 14px rgba(123,77,255,.3)!important;
+}
+.quick-btn:active{opacity:.6}
+
+/* Эффект капли при нажатии */
+.ripple{
+  position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);opacity:.9;z-index:0;
+  background:radial-gradient(circle,rgba(255,255,255,.5) 0%,rgba(255,255,255,.2) 40%,rgba(255,255,255,0) 70%);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.22);
+  animation:ripple .75s cubic-bezier(.2,.6,.3,1) forwards;
+}
+@keyframes ripple{to{transform:scale(1);opacity:0}}
+
+/* ---------- SVG-иконки (работают без интернета и внешних шрифтов) ---------- */
+.ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.125em;flex-shrink:0;display:inline-block}
+.logo .ic{width:30px;height:30px}
+.hero-badge .ic{width:1em;height:1em;vertical-align:-.15em}
+.fav-btn .ic{width:17px;height:17px}
+.fav-btn.on .ic,.qv-fav.on .ic{fill:currentColor}
+.qv-fav .ic{width:20px;height:20px}
+.social-links .ic{width:18px;height:18px}
+.telegram-icon .ic{width:1em;height:1em}
+.route-info .ic{width:18px;height:18px}
+.burger .ic{width:26px;height:26px}
+.cart-icon .ic{width:20px;height:20px}
+.back-top .ic{width:20px;height:20px}
+.search-box .ic{width:18px;height:18px}
+.remove-item .ic{width:1em;height:1em}
+
+/* ---------- Feedback ---------- */
+.fb-card{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.fb-side{text-align:center}
+.fb-side .telegram-contact{width:100%;max-width:340px;margin:0 auto}
+.fb-side p{color:var(--gray);margin-bottom:18px}
+.fb-label{display:inline-block;background:linear-gradient(135deg,var(--highlight),var(--violet));color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.stars{display:flex;gap:6px;margin-bottom:14px}
+.star{background:none;border:none;cursor:pointer;color:#555570;padding:2px;font-size:28px;line-height:1}
+.star.on{color:#ffc107}
+.star:hover{transform:scale(1.15)}
+textarea.field{min-height:110px;resize:vertical}
+.copy-btn{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);margin-top:10px}
+.fb-float{position:fixed;left:14px;bottom:24px;z-index:900;background:linear-gradient(135deg,var(--highlight),var(--violet));color:#fff;border:none;border-radius:30px;padding:11px 18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);font-size:.92rem}
+@media (max-width:768px){.fb-card{grid-template-columns:1fr}.fb-float{bottom:84px;left:12px}}
+
+/* ---------- Вкладка «Отзывы» ---------- */
+body:not(.view-reviews) .rv{display:none}
+body.view-reviews main>section:not(.rv){display:none}
+body.view-reviews .fb-float{display:none}
+body.view-reviews .hero-spacer{display:block}
+.rv-top{padding-top:110px}
+.rv-summary{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:22px}
+.rv-score{font-size:3rem;font-weight:800;color:#fff;line-height:1}
+.rv-stars{color:#ffc107;font-size:1.3rem;letter-spacing:2px}
+.rv-count{color:var(--gray);font-size:.95rem}
+.rv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.rv-item{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:18px}
+.rv-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.rv-name{font-weight:700;color:#fff}
+.rv-date{color:var(--gray);font-size:.8rem}
+.rv-text{color:var(--text);white-space:pre-wrap;word-break:break-word}
+.rv-mine{display:inline-block;background:rgba(123,77,255,.22);color:#cdbbff;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:12px;margin-top:10px}
+.rv-empty{text-align:center;color:var(--gray);padding:26px 10px}
+.rv-sub{color:var(--gray);margin:26px 0 12px;font-size:1.05rem;font-weight:700}
+.rv-back{margin-bottom:10px}
+
+/* ---------- Новые фишки ---------- */
+.toast.act{
+  pointer-events:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  left:50%;bottom:12px;width:calc(100% - 24px);max-width:560px;max-width:min(560px,calc(100% - 24px));
+  background:linear-gradient(135deg,var(--primary),var(--accent));border:none;border-radius:16px;
+  padding:14px 18px;font-weight:700;font-size:1rem;text-align:left;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:6000
+}
+.toast-act{background:none;color:#fff;border:none;padding:6px 2px;font-weight:800;cursor:pointer;font-size:1rem;white-space:nowrap;font-family:inherit}
+.toast-act:active{opacity:.6}
+.notify-btn{margin-top:8px;text-align:center}
+.recent{margin-bottom:14px}
+.recent-title{color:var(--gray);font-size:.85rem;font-weight:700;margin-bottom:8px}
+.recent-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.recent-item{flex:0 0 auto;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);border-radius:30px;padding:6px 14px 6px 8px;cursor:pointer;font-size:.88rem;white-space:nowrap}
+.recent-item:hover{border-color:var(--violet)}
+.recent-item span.e{font-size:22px}
+.orders-box{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.orders-box h4{color:#fff;margin-bottom:12px;font-size:1.1rem}
+.order-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.order-row .od{font-size:.8rem;color:var(--gray)}
+.order-row .ot{font-size:.92rem;color:var(--text)}
+.order-row .btn{padding:8px 16px;font-size:.88rem;margin:0;white-space:nowrap}
+
+/* ---------- Анимации и перетаскиваемый Feedback ---------- */
+.fb-float{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;animation:fbPulse 3.2s ease-in-out infinite}
+.fb-float.drag{cursor:grabbing;animation:none;transform:scale(1.08);box-shadow:0 14px 34px rgba(123,77,255,.55)}
+@keyframes fbPulse{0%,100%{box-shadow:0 0 0 0 rgba(123,77,255,.0),var(--shadow)}50%{box-shadow:0 0 0 9px rgba(123,77,255,.18),var(--shadow)}}
+.product-card.enter{animation:cardIn .55s cubic-bezier(.2,.7,.3,1) backwards;animation-delay:calc(var(--i,0) * 55ms)}
+@keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.chip[data-action]{border-style:dashed}
+.rv-item{animation:cardIn .5s ease backwards}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+</defs></svg>
+
+<header>
+  <div class="header-container">
+    <a href="#top" class="logo" id="logo" aria-label="zonixstore"><svg class="ic" aria-hidden="true"><use href="#i-cloud"/></svg> zonixstore</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#products">Товары</a></li>
+      <li><a href="#how">Как заказать</a></li>
+      <li><a href="#cart">Корзина</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+    </ul>
+    <div class="header-actions">
+      <button class="cart-icon" id="cartIcon" aria-label="Корзина"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span class="cart-count" id="cartCount">0</span></button>
+      <button class="burger" id="burgerBtn" aria-label="Меню"><svg class="ic" aria-hidden="true"><use href="#i-bars"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <span class="float-emoji" style="top:22%;left:8%">🍓</span>
+  <span class="float-emoji" style="top:60%;left:14%;animation-delay:-2s">🍒</span>
+  <span class="float-emoji" style="top:28%;right:10%;animation-delay:-4s">🍉</span>
+  <span class="float-emoji" style="top:66%;right:15%;animation-delay:-1s">🍑</span>
+  <div class="container">
+    <h1>zonixstore — <span>премиум жидкости</span> для вейпа</h1>
+    <p>Широкий выбор вкусов, качественные ингредиенты и быстрая доставка по всей Европе.</p>
+    <a href="#products" class="btn">Перейти в каталог</a>
+    <a href="#telegram" class="btn btn-secondary">Связаться в Telegram</a>
+    <div class="hero-badges">
+      <span class="hero-badge"><svg class="ic" aria-hidden="true"><use href="#i-truck"/></svg>Доставка по Европе</span>
+      <span class="hero-badge"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg>Быстрый заказ в Telegram</span>
+      <span class="hero-badge"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>12 вкусов</span>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="container">
+  <h2 class="section-title reveal">Каталог товаров</h2>
+  <div class="toolbar">
+    <div class="search-box"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><input type="search" id="searchInput" placeholder="Поиск по вкусу: cherry, арбуз, cola…" autocomplete="off" aria-label="Поиск"></div>
+    <select class="sort-select" id="sortSelect" aria-label="Сортировка">
+      <option value="default">По умолчанию</option>
+      <option value="az">По названию А–Я</option>
+      <option value="stock">Сначала в наличии</option>
+    </select>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip" data-cat="all">Все</button>
+    <button class="chip" data-cat="fruit">🍓 Фруктовые</button>
+    <button class="chip" data-cat="candy">🍬 Конфетные</button>
+    <button class="chip" data-cat="drinks">🥤 Напитки</button>
+    <button class="chip" data-toggle="stock">✅ В наличии</button>
+    <button class="chip" data-toggle="fav">❤ Избранное</button>
+    <button class="chip" data-action="random">🎲 Случайный вкус</button>
+    <button class="chip" data-action="share">🔗 Поделиться</button>
+  </div>
+  <div class="recent" id="recentBox"></div>
+  <div class="result-info" id="resultInfo"></div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section id="how" class="container">
+  <h2 class="section-title reveal">Как заказать</h2>
+  <div class="steps reveal">
+    <div class="step"><div class="step-num">1</div><h3>Выберите вкус</h3><p>Листайте каталог, используйте поиск и фильтры.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Добавьте в корзину</h3><p>Укажите нужное количество каждого вкуса.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Укажите город</h3><p>По городу мы подберём менеджера для вашего заказа.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Отправьте в Telegram</h3><p>Откроется чат с готовым сообщением — осталось нажать «Отправить».</p></div>
+  </div>
+</section>
+
+<section id="cart" class="container">
+  <h2 class="section-title reveal">Ваша корзина</h2>
+  <div class="cart-section reveal">
+    <div class="cart-header">
+      <h3 class="cart-title">Корзина товаров</h3>
+      <button class="btn" id="clearCartBtn">Очистить корзину</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary">
+      <div class="cart-total">Общая сумма: <span id="cartTotal">0 €</span></div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Оформить заказ</button>
+    </div>
+    <div class="orders-box" id="ordersBox" hidden></div>
+  </div>
+</section>
+
+<section id="faq" class="container">
+  <h2 class="section-title reveal">Частые вопросы</h2>
+  <div class="faq reveal">
+    <details><summary>Как оформить заказ?</summary><p>Добавьте вкусы в корзину, нажмите «Оформить заказ» и укажите город. Откроется Telegram с готовым сообщением — просто отправьте его менеджеру.</p></details>
+    <details><summary>Кому уходит мой заказ?</summary><p>Если вы из Oldenburg, Bremen, Wilhelmshaven или Bremerhaven — заказ получит @Sashanemezqwq. Для остальной Европы — @zonixstoreSuport.</p></details>
+    <details><summary>Как оплатить и когда придёт заказ?</summary><p>Способ оплаты и сроки доставки менеджер подтверждает в Telegram после получения вашего заказа.</p></details>
+    <details><summary>Вкуса нет в наличии. Что делать?</summary><p>Напишите менеджеру в Telegram и уточните, когда ожидается поступление. Вкус можно добавить в избранное ❤, чтобы не потерять.</p></details>
+    <details><summary>С какого возраста можно заказывать?</summary><p>Только с 18 лет. Продажа лицам младше 18 лет запрещена.</p></details>
+  </div>
+</section>
+
+<section id="telegram" class="telegram-section">
+  <div class="container reveal">
+    <h2 class="telegram-title">Свяжитесь с нами в Telegram</h2>
+    <p class="telegram-sub">Ответим быстро и поможем с заказом</p>
+    <div class="telegram-contacts">
+      <div class="telegram-contact" data-contact="Sashanemezqwq">
+        <div class="telegram-icon"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></div>
+        <div class="telegram-name">@Sashanemezqwq</div>
+        <div class="telegram-desc">Oldenburg, Bremen, Wilhelmshaven, Bremerhaven</div>
+        <a href="https://t.me/Sashanemezqwq" class="telegram-link" target="_blank" rel="noopener">Написать</a>
+      </div>
+      <div class="telegram-contact" data-contact="zonixstoreSuport">
+        <div class="telegram-icon"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></div>
+        <div class="telegram-name">@zonixstoreSuport</div>
+        <div class="telegram-desc">Вся остальная Европа</div>
+        <a href="https://t.me/zonixstoreSuport" class="telegram-link" target="_blank" rel="noopener">Написать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="container">
+  <h2 class="section-title reveal">Контакты</h2>
+  <div class="cart-section contacts-card reveal">
+    <p>Для связи с нами используйте Telegram:</p>
+    <div class="telegram-contacts">
+      <div class="telegram-contact" data-contact="Sashanemezqwq">
+        <div class="telegram-icon"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></div>
+        <div class="telegram-name">@Sashanemezqwq</div>
+        <div class="telegram-desc">Oldenburg, Bremen, Wilhelmshaven, Bremerhaven</div>
+        <a href="https://t.me/Sashanemezqwq" class="telegram-link" target="_blank" rel="noopener">Написать</a>
+      </div>
+      <div class="telegram-contact" data-contact="zonixstoreSuport">
+        <div class="telegram-icon"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></div>
+        <div class="telegram-name">@zonixstoreSuport</div>
+        <div class="telegram-desc">Вся остальная Европа</div>
+        <a href="https://t.me/zonixstoreSuport" class="telegram-link" target="_blank" rel="noopener">Написать</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="reviews" class="container rv rv-top">
+  <button class="btn btn-dark-outline rv-back" id="rvBack">&larr; В каталог</button>
+  <h2 class="section-title">Отзывы</h2>
+  <div class="cart-section contacts-card">
+    <div class="rv-summary" id="rvSummary"></div>
+    <div class="rv-list" id="rvList"></div>
+    <div id="rvMineWrap"></div>
+  </div>
+</section>
+
+<section id="feedback" class="container rv">
+  <h2 class="section-title">Оставить отзыв</h2>
+  <div class="cart-section contacts-card">
+    <div class="fb-card">
+      <div class="fb-side">
+        <span class="fb-label">Feedback</span>
+        <p>Есть отзыв, идея или проблема с заказом? Напишите напрямую — читаем всё.</p>
+        <div class="telegram-contact" data-contact="ZONIX_APECTOBAH">
+          <div class="telegram-icon"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></div>
+          <div class="telegram-name">@ZONIX_APECTOBAH</div>
+          <div class="telegram-desc">Feedback — по любым вопросам можно написать и в Telegram</div>
+          <a href="https://t.me/ZONIX_APECTOBAH" class="telegram-link" target="_blank" rel="noopener">Написать</a>
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Ваша оценка</label>
+        <div class="stars" id="stars" role="radiogroup" aria-label="Оценка"></div>
+        <label class="field-label" for="fbName">Имя (необязательно)</label>
+        <input class="field" id="fbName" maxlength="40" placeholder="Как к вам обращаться">
+        <label class="field-label" for="fbText">Сообщение</label>
+        <textarea class="field" id="fbText" maxlength="600" placeholder="Что понравилось, что улучшить?"></textarea>
+        <button class="save-btn" id="fbSend"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> Опубликовать отзыв</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>zonixstore</h3>
+        <p>Ваш надёжный поставщик качественных жидкостей для вейпа в Европе.</p>
+        <div class="social-links">
+          <a href="https://t.me/zonixstorechannel" target="_blank" rel="noopener" aria-label="Telegram канал"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Быстрые ссылки</h3>
+        <ul class="footer-links">
+          <li><a href="#products">Товары</a></li>
+          <li><a href="#cart">Корзина</a></li>
+          <li><a href="#telegram">Telegram</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Контакты</h3>
+        <ul class="footer-links">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg> Европа</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> @Sashanemezqwq</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> @zonixstoreSuport</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> Feedback: @ZONIX_APECTOBAH</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright"><p>&copy; 2026 zonixstore. Все права защищены. Продажа лицам младше 18 лет запрещена.</p></div>
+  </div>
+</footer>
+
+<!-- Возраст -->
+<div class="modal-overlay" id="ageModal" style="z-index:5000" role="dialog" aria-modal="true">
+  <div class="modal-box age-box">
+    <h2>🔞 Вам есть 18 лет?</h2>
+    <p>Сайт содержит товары, продажа которых лицам младше 18 лет запрещена.</p>
+    <button class="btn" id="ageYes">Да, мне есть 18</button>
+    <button class="btn btn-dark-outline" id="ageNo">Нет</button>
+  </div>
+</div>
+
+<!-- Быстрый просмотр -->
+<div class="modal-overlay" id="quickModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="quickTitle">Товар</div>
+      <button class="close-modal" id="closeQuick" aria-label="Закрыть">&#10005;</button>
+    </div>
+    <div id="quickBody"></div>
+  </div>
+</div>
+
+<button class="mobile-cart-bar" id="mobileBar" aria-label="Открыть корзину">
+  <span><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg> <span id="barQty">0</span> шт.</span>
+  <span id="barSum">0 €</span>
+  <span>Корзина &rarr;</span>
+</button>
+<button class="fb-float" id="fbFloat">💬 Feedback</button>
+<button class="back-top" id="backTop" aria-label="Наверх"><svg class="ic" aria-hidden="true"><use href="#i-arrow-up"/></svg></button>
+
+<!-- Оформление заказа -->
+<div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">🛒 Оформление заказа</div>
+      <button class="close-modal" id="closeCheckout" aria-label="Закрыть">&#10005;</button>
+    </div>
+    <div class="order-summary" id="orderSummary"></div>
+    <label class="field-label" for="cityInput">Ваш город</label>
+    <input class="field" id="cityInput" list="cityList" placeholder="Например: Bremen, Berlin, Warszawa" autocomplete="off" maxlength="60">
+    <datalist id="cityList">
+      <option value="Oldenburg"><option value="Bremen"><option value="Wilhelmshaven"><option value="Bremerhaven">
+    </datalist>
+    <div class="route-info" id="routeInfo"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span>Введите город — мы покажем, кому уйдёт заказ.</span></div>
+    <label class="field-label" for="noteInput">Комментарий (необязательно)</label>
+    <input class="field" id="noteInput" placeholder="Пожелания по доставке" maxlength="150">
+    <button class="save-btn" id="sendOrderBtn"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> Отправить заказ в Telegram</button>
+    <button class="save-btn copy-btn" id="copyOrderBtn" type="button">📋 Скопировать текст заказа</button>
+  </div>
+</div>
+
+<!-- Вход в админ-панель (скрыт) -->
+<div class="modal-overlay" id="passwordModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">🔒 Доступ</div>
+      <button class="close-modal" id="closePwd" aria-label="Закрыть">&#10005;</button>
+    </div>
+    <input type="password" class="field" id="adminPassword" placeholder="Пароль" autocomplete="off">
+    <button class="save-btn" id="checkPwdBtn">Войти</button>
+  </div>
+</div>
+
+<!-- Админ-панель -->
+<div class="modal-overlay" id="adminModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">⚙️ Управление запасами</div>
+      <button class="close-modal" id="closeAdmin" aria-label="Закрыть">&#10005;</button>
+    </div>
+    <div class="admin-form" id="adminItems"></div>
+    <button class="save-btn" id="saveStocksBtn">💾 Сохранить изменения</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ НАСТРОЙКИ ============ */
+var TG_LOCAL  = "Sashanemezqwq";      // Oldenburg, Bremen, Wilhelmshaven, Bremerhaven
+var TG_EUROPE = "zonixstoreSuport";   // вся остальная Европа
+var SPECIAL_CITIES = ["oldenburg","bremerhaven","wilhelmshaven","bremen"];
+
+// Пароль админки хранится только в виде хеша SHA-256 (соль + пароль).
+var ADMIN_SALT = "zonixstore|";
+var ADMIN_HASH = "c18dbafc6eee16bf6b34b77e883fcacaa24a40175898a47259146d3d824f0fec";
+
+var STORAGE_KEY = "zonixstore_stocks_v1";
+var AGE_KEY = "zonixstore_age_ok";
+var LOCK_KEY = "zonixstore_lock";
+
+var products = [
+  {id:1, name:"Gummy",desc:"Сладкий вкус жевательных конфеток",price:16,emoji:"🍬",stock:15,reserved:0},
+  {id:2, name:"Peach Ice",desc:"Персик с холодком льда",price:16,emoji:"🍑",stock:0,reserved:0},
+  {id:3, name:"Strawberry Watermelon 3",desc:"Клубника и арбуз в идеальном балансе",price:16,emoji:"🍓",stock:3,reserved:0},
+  {id:4, name:"Cola 2",desc:"Классический вкус колы с нотками ванили",price:16,emoji:"🥤",stock:0,reserved:0},
+  {id:5, name:"Pink Grapefruit",desc:"Розовый грейпфрут с кислинкой",price:16,emoji:"🍊",stock:25,reserved:0},
+  {id:6, name:"Cherry",desc:"Спелая вишня с кисло-сладким вкусом",price:16,emoji:"🍒",stock:5,reserved:0},
+  {id:7, name:"Cherry Cola",desc:"Вишня и кола — идеальное сочетание",price:16,emoji:"🍒",stock:8,reserved:0},
+  {id:8, name:"Sour Watermelon Gummy",desc:"Кислая арбузная жевательная резинка",price:16,emoji:"🍉",stock:10,reserved:0},
+  {id:9, name:"Double Apple",desc:"Двойное яблоко — сладкое и сочное",price:16,emoji:"🍎",stock:15,reserved:0},
+  {id:10,name:"Blackcurrant Anised",desc:"Чёрная смородина с анисом",price:16,emoji:"🍇",stock:7,reserved:0},
+  {id:11,name:"Blueberry Watermelon 2",desc:"Черника и арбуз — освежающий микс",price:16,emoji:"🫐",stock:5,reserved:0},
+  {id:12,name:"Strawberry Watermelon",desc:"Клубника и арбуз — классическое сочетание",price:16,emoji:"🍓",stock:14,reserved:0}
+];
+var cart = [];
+
+var CAT_BY_ID = {1:"candy",2:"fruit",3:"fruit",4:"drinks",5:"fruit",6:"fruit",7:"drinks",8:"candy",9:"fruit",10:"fruit",11:"fruit",12:"fruit"};
+var CAT_NAMES = {fruit:"Фруктовые",candy:"Конфетные",drinks:"Напитки"};
+products.forEach(function(p){ p.cat = CAT_BY_ID[p.id] || "fruit"; });
+var FAV_KEY = "zonixstore_favs", CART_KEY = "zonixstore_cart";
+var favs = [];
+var state = {q:"",cat:"all",sort:"default",stockOnly:false,favOnly:false};
+var quickId = null, animNext = true;
+
+/* ============ УТИЛИТЫ ============ */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function avail(p){ return Math.max(0,p.stock-p.reserved); }
+function findProduct(id){ for(var i=0;i<products.length;i++) if(products[i].id===id) return products[i]; return null; }
+function findCartItem(id){ for(var i=0;i<cart.length;i++) if(cart[i].id===id) return cart[i]; return null; }
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+var toastTimer;
+function toast(msg){
+  var t=$("toast"); t.classList.remove("act"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove("show"); },2800);
+}
+function toastAction(msg,label,fn){
+  var t=$("toast"); t.textContent=msg+" ";
+  var b=document.createElement("button"); b.className="toast-act"; b.type="button"; b.textContent="\u21A9 "+label;
+  b.onclick=function(){ t.classList.remove("show","act"); fn(); };
+  t.appendChild(b); t.classList.add("show","act");
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove("show","act"); },6000);
+}
+function openModal(id){ $(id).classList.add("active"); }
+function closeModal(id){ $(id).classList.remove("active"); }
+
+/* ============ SHA-256 (с запасным вариантом без crypto.subtle) ============ */
+function sha256js(ascii){
+  var rr=function(v,a){return (v>>>a)|(v<<(32-a));};
+  var maxWord=Math.pow(2,32),result="",words=[],bitLen=ascii.length*8,hash=[],k=[],pc=0,comp={},i,j;
+  for(var c=2;pc<64;c++){
+    if(!comp[c]){
+      for(i=0;i<313;i+=c) comp[i]=c;
+      hash[pc]=(Math.pow(c,.5)*maxWord)|0;
+      k[pc++]=(Math.pow(c,1/3)*maxWord)|0;
+    }
+  }
+  ascii+="\x80";
+  while(ascii.length%64-56) ascii+="\x00";
+  for(i=0;i<ascii.length;i++){ j=ascii.charCodeAt(i); words[i>>2]|=j<<((3-i)%4)*8; }
+  words[words.length]=((bitLen/maxWord)|0);
+  words[words.length]=bitLen;
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;
+    hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+
+        (w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10))|0));
+      var t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);
+      hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++) hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++) for(j=3;j+1;j--){ var b=(hash[i]>>(j*8))&255; result+=((b<16)?0:"")+b.toString(16); }
+  return result;
+}
+function sha256(str, cb){
+  var utf8=unescape(encodeURIComponent(str));
+  try{
+    if(window.crypto && crypto.subtle){
+      var bytes=new Uint8Array(utf8.length);
+      for(var i=0;i<utf8.length;i++) bytes[i]=utf8.charCodeAt(i);
+      crypto.subtle.digest("SHA-256",bytes).then(function(buf){
+        var a=new Uint8Array(buf),h="";
+        for(var j=0;j<a.length;j++) h+=("0"+a[j].toString(16)).slice(-2);
+        cb(h);
+      })["catch"](function(){ cb(sha256js(utf8)); });
+      return;
+    }
+  }catch(e){}
+  cb(sha256js(utf8));
+}
+
+/* ============ СКЛАД ============ */
+function loadStocks(){
+  try{
+    var raw=lsGet(STORAGE_KEY); if(!raw) return;
+    var saved=JSON.parse(raw);
+    products.forEach(function(p){
+      var v=saved[p.id];
+      if(typeof v==="number" && isFinite(v) && v>=0) p.stock=Math.floor(v);
+    });
+  }catch(e){}
+}
+function persistStocks(){
+  var d={}; products.forEach(function(p){ d[p.id]=p.stock; });
+  lsSet(STORAGE_KEY,JSON.stringify(d));
+}
+
+/* ============ КАТАЛОГ ============ */
+function loadFavs(){
+  try{ var a=JSON.parse(lsGet(FAV_KEY)||"[]"); if(Array.isArray(a)) favs=a.filter(function(x){return typeof x==="number";}); }catch(e){}
+}
+function saveFavs(){ lsSet(FAV_KEY,JSON.stringify(favs)); }
+function toggleFav(id){
+  var i=favs.indexOf(id);
+  if(i>=0){ favs.splice(i,1); toast("Убрано из избранного"); }
+  else{ favs.push(id); toast("Добавлено в избранное ❤"); }
+  saveFavs(); renderProducts();
+  if(quickId===id) openQuick(id);
+}
+
+function getVisible(){
+  var q=state.q.trim().toLowerCase();
+  var list=products.filter(function(p){
+    if(state.cat!=="all" && p.cat!==state.cat) return false;
+    if(state.stockOnly && avail(p)<=0) return false;
+    if(state.favOnly && favs.indexOf(p.id)<0) return false;
+    if(q){
+      var hay=(p.name+" "+p.desc+" "+CAT_NAMES[p.cat]).toLowerCase();
+      var words=q.split(/\s+/);
+      for(var i=0;i<words.length;i++) if(hay.indexOf(words[i])<0) return false;
+    }
+    return true;
+  });
+  if(state.sort==="az") list.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  else if(state.sort==="stock") list.sort(function(a,b){ return (avail(b)>0)-(avail(a)>0); });
+  return list;
+}
+
+function resetFilters(){
+  animNext=true;
+  state.q=""; state.cat="all"; state.sort="default"; state.stockOnly=false; state.favOnly=false;
+  $("searchInput").value=""; $("sortSelect").value="default";
+  renderProducts();
+}
+
+function renderChips(){
+  Array.prototype.forEach.call(document.querySelectorAll("#chips .chip"),function(c){
+    var cat=c.getAttribute("data-cat"), tg=c.getAttribute("data-toggle"), on=false;
+    if(cat) on=(state.cat===cat);
+    else if(tg==="stock") on=state.stockOnly;
+    else if(tg==="fav") on=state.favOnly;
+    c.classList.toggle("active",on);
+    c.setAttribute("aria-pressed",on?"true":"false");
+  });
+}
+
+function renderProducts(){
+  var list=getVisible(), html="";
+  var anim=animNext; animNext=false;
+  list.forEach(function(p,idx){
+    var a=avail(p), out=a===0, low=!out&&a<=5, fav=favs.indexOf(p.id)>=0;
+    var bc=out?"out-of-stock":(low?"low":"in-stock");
+    var bt=out?"Нет в наличии":(low?"Осталось: "+a+" шт.":"В наличии: "+a+" шт.");
+    html+='<div class="product-card'+(out?' out-of-stock':'')+(anim?' enter':'')+'" data-id="'+p.id+'" style="--i:'+Math.min(idx,12)+'">'+
+      '<div class="stock-badge '+bc+'">'+bt+'</div>'+
+      '<button class="fav-btn'+(fav?' on':'')+'" data-id="'+p.id+'" aria-label="В избранное"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg></button>'+
+      '<div class="product-image" data-quick="'+p.id+'"><div class="product-emoji">'+p.emoji+'</div></div>'+
+      '<div class="product-info"><h3 class="product-title" data-quick="'+p.id+'">'+esc(p.name)+'</h3>'+
+      '<p class="product-description">'+esc(p.desc)+'</p>'+
+      '<div class="price-row"><div class="product-price">'+p.price+' €</div><button class="quick-btn" data-quick="'+p.id+'">Подробнее</button></div>'+
+      '<button class="add-to-cart" data-id="'+p.id+'"'+(out?' disabled':'')+'><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg> '+(out?'Нет в наличии':'В корзину')+'</button>'+
+      (out?'<button class="quick-btn notify-btn" data-notify="'+p.id+'">🔔 Сообщить о поступлении</button>':'')+
+      '</div></div>';
+  });
+  if(!list.length){
+    html='<div class="empty-state"><div class="big">🔍</div><div>Ничего не найдено. Попробуйте изменить запрос или фильтры.</div>'+
+      '<button class="btn" id="resetFiltersBtn">Сбросить фильтры</button></div>';
+  }
+  $("productsGrid").innerHTML=html;
+  $("resultInfo").textContent="Показано: "+list.length+" из "+products.length;
+  renderChips();
+}
+
+/* ============ БЫСТРЫЙ ПРОСМОТР ============ */
+function openQuick(id){
+  var p=findProduct(id); if(!p) return;
+  quickId=id; addRecent(id);
+  var a=avail(p), out=a===0, low=!out&&a<=5, fav=favs.indexOf(id)>=0;
+  var st=out?'<span class="qv-tag no">Нет в наличии</span>':(low?'<span class="qv-tag low">Осталось: '+a+' шт.</span>':'<span class="qv-tag ok">В наличии: '+a+' шт.</span>');
+  $("quickTitle").textContent=p.name;
+  $("quickBody").innerHTML=
+    '<div class="qv-emoji">'+p.emoji+'</div>'+
+    '<p style="color:var(--gray)">'+esc(p.desc)+'</p>'+
+    '<div class="qv-tags"><span class="qv-tag">'+esc(CAT_NAMES[p.cat])+'</span>'+st+'</div>'+
+    '<div class="qv-price">'+p.price+' €</div>'+
+    '<div class="qv-actions"><button class="save-btn qv-add" data-id="'+p.id+'"'+(out?' disabled':'')+'><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg> '+(out?'Нет в наличии':'В корзину')+'</button>'+
+    '<button class="qv-fav'+(fav?' on':'')+'" data-id="'+p.id+'" aria-label="В избранное"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg></button></div>';
+  openModal("quickModal");
+}
+function closeQuick(){ quickId=null; closeModal("quickModal"); }
+
+/* ============ СОХРАНЕНИЕ КОРЗИНЫ ============ */
+function saveCart(){
+  lsSet(CART_KEY,JSON.stringify(cart.map(function(i){ return {id:i.id,q:i.quantity}; })));
+}
+function restoreCart(){
+  try{
+    var a=JSON.parse(lsGet(CART_KEY)||"[]"); if(!Array.isArray(a)) return;
+    a.forEach(function(r){
+      var p=findProduct(r.id); if(!p||typeof r.q!=="number") return;
+      var q=Math.min(Math.floor(r.q),avail(p));
+      if(q>0){ cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji,quantity:q}); p.reserved+=q; }
+    });
+  }catch(e){}
+}
+function updateBar(){
+  var qty=cart.reduce(function(s,i){return s+i.quantity;},0);
+  $("barQty").textContent=qty; $("barSum").textContent=cartSum()+" €";
+  $("mobileBar").classList.toggle("show",qty>0);
+}
+
+/* ============ КОРЗИНА ============ */
+function bumpCart(){
+  var c=$("cartIcon"); c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump");
+}
+function addToCart(id){
+  var p=findProduct(id); if(!p) return;
+  if(avail(p)<=0){ toast("Больше нет в наличии ❌"); return; }
+  var it=findCartItem(id);
+  if(it) it.quantity++; else cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji,quantity:1});
+  p.reserved++;
+  var srcEl=document.querySelector("#quickModal.active .qv-emoji")||document.querySelector('.product-card[data-id="'+id+'"] .product-emoji');
+  var srcRect=srcEl?srcEl.getBoundingClientRect():null;
+  renderProducts(); updateCart(); bumpCart(); flyToCart(p.emoji,srcRect);
+  toast("Добавлено в корзину ✓");
+}
+function changeQty(id,delta){
+  var it=findCartItem(id), p=findProduct(id);
+  if(!it||!p) return;
+  if(delta>0){
+    if(avail(p)<=0){ toast("Больше нет в наличии (максимум "+p.stock+" шт.)"); return; }
+    it.quantity++; p.reserved++;
+  }else{
+    if(it.quantity<=1){ removeItem(id); return; }
+    it.quantity--; p.reserved=Math.max(0,p.reserved-1);
+  }
+  renderProducts(); updateCart();
+}
+function restoreItems(arr){
+  var n=0;
+  arr.forEach(function(r){
+    var p=findProduct(r.id); if(!p) return;
+    var q=Math.min(r.quantity,avail(p)); if(q<=0) return;
+    var it=findCartItem(p.id);
+    if(it) it.quantity+=q; else cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji,quantity:q});
+    p.reserved+=q; n+=q;
+  });
+  renderProducts(); updateCart();
+  if(n) bumpCart();
+  return n;
+}
+function removeItem(id){
+  var removed=null;
+  for(var i=0;i<cart.length;i++){
+    if(cart[i].id===id){
+      var p=findProduct(id);
+      if(p) p.reserved=Math.max(0,p.reserved-cart[i].quantity);
+      removed={id:id,quantity:cart[i].quantity};
+      cart.splice(i,1); break;
+    }
+  }
+  renderProducts(); updateCart();
+  if(removed) toastAction("Товар удалён","Отменить",function(){ restoreItems([removed]); });
+}
+function clearCart(){
+  if(!cart.length) return;
+  var snap=cart.map(function(i){ return {id:i.id,quantity:i.quantity}; });
+  cart.forEach(function(it){ var p=findProduct(it.id); if(p) p.reserved=Math.max(0,p.reserved-it.quantity); });
+  cart=[]; renderProducts(); updateCart();
+  toastAction("Корзина очищена","Отменить",function(){ restoreItems(snap); });
+}
+function cartSum(){ return cart.reduce(function(s,i){return s+i.price*i.quantity;},0); }
+function updateCart(){ updateCartView(); saveCart(); updateBar(); }
+function updateCartView(){
+  var box=$("cartItems"), btn=$("checkoutBtn");
+  if(!cart.length){
+    box.innerHTML='<p style="text-align:center;color:#999;padding:24px 0">🛒 Ваша корзина пуста</p>';
+    btn.disabled=true; $("cartTotal").textContent="0 €"; $("cartCount").textContent="0"; return;
+  }
+  var qty=0, html="";
+  cart.forEach(function(it){
+    qty+=it.quantity;
+    html+='<div class="cart-item"><div class="cart-item-image">'+it.emoji+'</div>'+
+      '<div class="cart-item-details"><div class="cart-item-name">'+esc(it.name)+'</div>'+
+      '<div class="cart-item-price">'+it.price+' € за шт.</div>'+
+      '<div class="cart-item-quantity"><button class="quantity-btn" data-act="dec" data-id="'+it.id+'" aria-label="Меньше">−</button>'+
+      '<span class="quantity-value">'+it.quantity+'</span>'+
+      '<button class="quantity-btn" data-act="inc" data-id="'+it.id+'" aria-label="Больше">+</button></div></div>'+
+      '<button class="remove-item" data-id="'+it.id+'" aria-label="Удалить"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>';
+  });
+  box.innerHTML=html;
+  $("cartTotal").textContent=cartSum()+" €";
+  $("cartCount").textContent=qty;
+  btn.disabled=false;
+}
+
+/* ============ ЗАКАЗ → TELEGRAM ============ */
+function normalizeCity(s){
+  return s.toLowerCase().replace(/ä/g,"a").replace(/ö/g,"o").replace(/ü/g,"u").replace(/ß/g,"ss").replace(/[^a-z0-9а-яё ]/g," ").replace(/\s+/g," ").trim();
+}
+function managerFor(city){
+  var n=normalizeCity(city);
+  for(var i=0;i<SPECIAL_CITIES.length;i++){
+    if(new RegExp("(^| )"+SPECIAL_CITIES[i]+"( |$)").test(n) || n.indexOf(SPECIAL_CITIES[i])===0) return TG_LOCAL;
+  }
+  return TG_EUROPE;
+}
+function updateRouteInfo(){
+  var city=$("cityInput").value.trim(), el=$("routeInfo");
+  if(!city){ el.innerHTML='<svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span>Введите город — мы покажем, кому уйдёт заказ.</span>'; return; }
+  var m=managerFor(city);
+  el.innerHTML='<svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span>Заказ будет отправлен менеджеру <b>@'+m+'</b></span>';
+}
+function openCheckout(){
+  if(!cart.length) return;
+  var html="";
+  cart.forEach(function(it){
+    html+='<div><span>'+esc(it.name)+' × '+it.quantity+'</span><span>'+(it.price*it.quantity)+' €</span></div>';
+  });
+  html+='<div class="sum-total"><span>Итого</span><span>'+cartSum()+' €</span></div>';
+  $("orderSummary").innerHTML=html;
+  if(!$("cityInput").value) $("cityInput").value=lsGet(CITY_KEY)||"";
+  updateRouteInfo();
+  openModal("checkoutModal");
+  setTimeout(function(){ $("cityInput").focus(); },50);
+}
+var CITY_KEY="zonixstore_city";
+function buildOrderText(city,note){
+  var msg="Здравствуйте! Хочу заказать:\n\n";
+  cart.forEach(function(it){
+    msg+="• "+it.name+" — "+it.quantity+" шт. × "+it.price+" € = "+(it.price*it.quantity)+" €\n";
+  });
+  msg+="\n💰 Общая сумма: "+cartSum()+" €";
+  msg+="\n📍 Город: "+city;
+  if(note) msg+="\n💬 Комментарий: "+note;
+  msg+="\n\nЖду подтверждения и инструкции по оплате/доставке. Спасибо!";
+  return msg;
+}
+function copyText(t,ok){
+  function fallback(){
+    var a=document.createElement("textarea"); a.value=t; a.style.position="fixed"; a.style.opacity="0";
+    document.body.appendChild(a); a.select();
+    try{ document.execCommand("copy"); toast(ok); }catch(e){ toast("Не удалось скопировать"); }
+    document.body.removeChild(a);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){ toast(ok); },fallback);
+  }else fallback();
+}
+function copyOrder(){
+  if(!cart.length) return;
+  var city=$("cityInput").value.trim()||"—";
+  copyText(buildOrderText(city,$("noteInput").value.trim()),"Текст заказа скопирован ✓");
+}
+/* ===== ОТЗЫВЫ =====
+   Опубликованные отзывы показываются всем посетителям. Сайт статический (без сервера),
+   поэтому добавляй реальные отзывы клиентов сюда вручную, например:
+   {name:"Имя", rating:5, text:"Текст отзыва", date:"2026-11-08"}  */
+var REVIEWS = [];
+var MINE_KEY="zonixstore_myreviews";
+var myReviews=[];
+function loadMine(){ try{ var a=JSON.parse(lsGet(MINE_KEY)||"[]"); if(Array.isArray(a)) myReviews=a; }catch(e){} }
+function starsStr(n){ var r=Math.round(n),o=""; for(var i=1;i<=5;i++) o+=i<=r?"★":"☆"; return o; }
+function fmtDate(d){ try{ var x=new Date(d); return isNaN(x)?"":x.toLocaleDateString("ru-RU"); }catch(e){ return ""; } }
+var REVIEWS_DB=""; /* Общие отзывы для ВСЕХ посетителей: вставь сюда адрес Firebase Realtime Database,
+   например "https://имя-проекта-default-rtdb.europe-west1.firebasedatabase.app" (правила: чтение и запись /reviews). Пусто = отзывы хранятся только в браузере автора. */
+var remoteReviews=[];
+function cleanReview(r,id){
+  var rt=parseInt(r&&r.rating,10); if(!(rt>=1&&rt<=5)) rt=0;
+  return {id:id||"",name:String((r&&r.name)||"").slice(0,40),rating:rt,text:String((r&&r.text)||"").slice(0,600),date:(r&&r.date)||""};
+}
+function loadRemote(){
+  if(!REVIEWS_DB||!window.fetch) return;
+  fetch(REVIEWS_DB.replace(/\/$/,"")+"/reviews.json").then(function(r){return r.json();}).then(function(d){
+    remoteReviews=[];
+    if(d&&typeof d==="object") Object.keys(d).forEach(function(k){ var c=cleanReview(d[k],k); if(c.text) remoteReviews.push(c); });
+    renderReviews();
+  })["catch"](function(){});
+}
+function reviewHtml(r,mine){
+  return '<div class="rv-item"><div class="rv-head"><span class="rv-name">'+esc(r.name||"Аноним")+'</span><span class="rv-date">'+esc(fmtDate(r.date))+'</span></div>'+
+    (r.rating?'<div class="rv-stars">'+starsStr(r.rating)+'</div>':'')+
+    '<p class="rv-text">'+esc(r.text)+'</p>'+
+    (mine?'<span class="rv-mine">Ваш отзыв'+(r.synced?'':' · виден только на этом устройстве')+'</span>':'')+'</div>';
+}
+function allReviews(){
+  var mineIds={}; myReviews.forEach(function(m){ if(m.rid) mineIds[m.rid]=1; });
+  var list=[];
+  REVIEWS.forEach(function(r){ var c=cleanReview(r); c.mine=false; list.push(c); });
+  remoteReviews.forEach(function(r){ if(!mineIds[r.id]){ r.mine=false; list.push(r); } });
+  myReviews.forEach(function(m){ var c=cleanReview(m); c.mine=true; c.synced=!!m.rid; list.push(c); });
+  list.sort(function(a,b){ return (new Date(b.date)||0)-(new Date(a.date)||0); });
+  return list;
+}
+function renderReviews(){
+  var list=allReviews(), rated=list.filter(function(r){return r.rating>0;}), sum=$("rvSummary");
+  if(!list.length){
+    sum.innerHTML='';
+    $("rvList").innerHTML='<div class="rv-empty" style="grid-column:1/-1">Пока нет отзывов. Станьте первым — оставьте отзыв ниже!</div>';
+  }else{
+    var avg=rated.length?rated.reduce(function(a,r){return a+r.rating;},0)/rated.length:0;
+    sum.innerHTML=(rated.length?'<div class="rv-score">'+avg.toFixed(1)+'</div><div><div class="rv-stars">'+starsStr(avg)+'</div>':'<div>')+
+      '<div class="rv-count">Отзывов: '+list.length+'</div></div>';
+    $("rvList").innerHTML=list.map(function(r){return reviewHtml(r,r.mine);}).join("");
+  }
+  $("rvMineWrap").innerHTML="";
+}
+function showView(v){
+  document.body.classList.toggle("view-reviews",v==="reviews");
+  if(v==="reviews") renderReviews();
+  window.scrollTo(0,0);
+}
+var fbRating=0, TG_FEEDBACK="ZONIX_APECTOBAH";
+function renderStars(){
+  var h="";
+  for(var i=1;i<=5;i++) h+='<button type="button" class="star'+(i<=fbRating?' on':'')+'" data-v="'+i+'" role="radio" aria-checked="'+(i===fbRating)+'" aria-label="'+i+' из 5">★</button>';
+  $("stars").innerHTML=h;
+}
+function sendFeedback(){
+  var text=$("fbText").value.trim(), name=$("fbName").value.trim();
+  if(text.length<3){ toast("Напишите сообщение"); $("fbText").focus(); return; }
+  var last=parseInt(lsGet("zonixstore_lastfb")||"0",10);
+  if(Date.now()-last<30000){ toast("Подождите немного перед следующим отзывом"); return; }
+  lsSet("zonixstore_lastfb",String(Date.now()));
+  var rev={name:name.slice(0,40),rating:fbRating,text:text.slice(0,600),date:new Date().toISOString()};
+  myReviews.push(rev);
+  lsSet(MINE_KEY,JSON.stringify(myReviews.slice(-20)));
+  if(REVIEWS_DB&&window.fetch){
+    fetch(REVIEWS_DB.replace(/\/$/,"")+"/reviews.json",{method:"POST",body:JSON.stringify(rev)})
+      .then(function(r){return r.json();}).then(function(j){
+        if(j&&j.name){ rev.rid=j.name; lsSet(MINE_KEY,JSON.stringify(myReviews.slice(-20))); loadRemote(); renderReviews(); }
+      })["catch"](function(){});
+  }
+  $("fbText").value=""; $("fbName").value=""; fbRating=0; renderStars(); renderReviews();
+  toast("Спасибо! Отзыв добавлен ✓");
+  var l=$("rvList"); if(l) window.scrollTo({top:l.getBoundingClientRect().top+window.pageYOffset-100,behavior:"smooth"});
+}
+/* ===== Уведомление о поступлении ===== */
+function notifyMe(id){
+  var p=findProduct(id); if(!p) return;
+  var city=lsGet("zonixstore_city")||"";
+  var tg=city?managerFor(city):TG_EUROPE;
+  var msg="Здравствуйте! Сообщите, пожалуйста, когда появится вкус: "+p.name+(city?"\n📍 Город: "+city:"");
+  toast("Открываем Telegram: @"+tg);
+  window.location.href="https://t.me/"+tg+"?text="+encodeURIComponent(msg);
+}
+
+/* ===== История заказов и «Повторить» ===== */
+var ORDERS_KEY="zonixstore_orders", orders=[];
+function loadOrders(){ try{ var a=JSON.parse(lsGet(ORDERS_KEY)||"[]"); if(Array.isArray(a)) orders=a; }catch(e){} }
+function saveOrder(city){
+  orders.unshift({date:new Date().toISOString(),city:city,total:cartSum(),
+    items:cart.map(function(i){ return {id:i.id,name:i.name,q:i.quantity}; })});
+  orders=orders.slice(0,5);
+  lsSet(ORDERS_KEY,JSON.stringify(orders)); renderOrders();
+}
+function renderOrders(){
+  var box=$("ordersBox");
+  if(!orders.length){ box.hidden=true; box.innerHTML=""; return; }
+  var h='<h4>🕘 Мои прошлые заказы</h4>';
+  orders.forEach(function(o,i){
+    var txt=o.items.map(function(x){ return esc(x.name)+" ×"+x.q; }).join(", ");
+    h+='<div class="order-row"><div><div class="od">'+esc(fmtDate(o.date))+' · '+esc(o.city||"")+' · '+o.total+' €</div><div class="ot">'+txt+'</div></div>'+
+       '<button class="btn" data-reorder="'+i+'">Повторить</button></div>';
+  });
+  box.innerHTML=h; box.hidden=false;
+}
+function reorder(i){
+  var o=orders[i]; if(!o) return;
+  var n=restoreItems(o.items.map(function(x){ return {id:x.id,quantity:x.q}; }));
+  toast(n?"Добавлено в корзину: "+n+" шт. ✓":"Этих вкусов сейчас нет в наличии");
+  if(n) $("cart").scrollIntoView({behavior:"smooth"});
+}
+
+/* ===== Недавно просмотренные ===== */
+var RECENT_KEY="zonixstore_recent", recent=[];
+function loadRecent(){ try{ var a=JSON.parse(lsGet(RECENT_KEY)||"[]"); if(Array.isArray(a)) recent=a.filter(function(x){return typeof x==="number";}); }catch(e){} }
+function addRecent(id){
+  recent=recent.filter(function(x){return x!==id;}); recent.unshift(id); recent=recent.slice(0,6);
+  lsSet(RECENT_KEY,JSON.stringify(recent)); renderRecent();
+}
+function renderRecent(){
+  var box=$("recentBox"), items=recent.map(findProduct).filter(Boolean);
+  if(!items.length){ box.innerHTML=""; return; }
+  box.innerHTML='<div class="recent-title">Вы недавно смотрели</div><div class="recent-row">'+
+    items.map(function(p){ return '<button class="recent-item" data-quick="'+p.id+'"><span class="e">'+p.emoji+'</span>'+esc(p.name)+'</button>'; }).join("")+'</div>';
+}
+
+/* ===== Анимация «полёта» в корзину ===== */
+function flyToCart(emoji,rect){
+  if(!rect||!document.body.animate||(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  var t=$("cartIcon").getBoundingClientRect();
+  var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+  var el=document.createElement("div"); el.textContent=emoji;
+  el.style.cssText="position:fixed;z-index:7000;pointer-events:none;font-size:34px;line-height:1;left:"+(cx-17)+"px;top:"+(cy-17)+"px";
+  document.body.appendChild(el);
+  var dx=t.left+t.width/2-cx, dy=t.top+t.height/2-cy;
+  var a=el.animate([
+    {transform:"translate(0,0) scale(1)",opacity:1},
+    {transform:"translate("+(dx*.45)+"px,"+(dy*.45-70)+"px) scale(1.25)",opacity:1,offset:.45},
+    {transform:"translate("+dx+"px,"+dy+"px) scale(.3)",opacity:.35}
+  ],{duration:750,easing:"cubic-bezier(.45,0,.6,1)"});
+  a.onfinish=function(){ if(el.parentNode) el.parentNode.removeChild(el); bumpCart(); };
+}
+
+/* ===== «Случайный вкус» и «Поделиться» ===== */
+function chipAction(a){
+  if(a==="random"){
+    var ok=products.filter(function(p){ return avail(p)>0; });
+    if(!ok.length){ toast("Сейчас всё раскуплено 😕"); return; }
+    openQuick(ok[Math.floor(Math.random()*ok.length)].id);
+  }else if(a==="share"){
+    var url=location.href.split("#")[0];
+    if(navigator.share){ navigator.share({title:"zonixstore",text:"Жидкости для вейпа zonixstore",url:url})["catch"](function(){}); }
+    else copyText(url,"Ссылка скопирована ✓");
+  }
+}
+
+/* ===== Перетаскиваемая кнопка Feedback ===== */
+function initDragFeedback(){
+  var b=$("fbFloat"), KEY="zonixstore_fbpos", moved=false, down=false, sx=0, sy=0, ox=0, oy=0;
+  function place(x,y){
+    var w=b.offsetWidth, h=b.offsetHeight;
+    x=Math.min(Math.max(4,x),Math.max(4,window.innerWidth-w-4));
+    y=Math.min(Math.max(4,y),Math.max(4,window.innerHeight-h-4));
+    b.style.left=x+"px"; b.style.top=y+"px"; b.style.bottom="auto"; b.style.right="auto";
+  }
+  try{ var sp=JSON.parse(lsGet(KEY)||"null"); if(sp&&typeof sp.x==="number"&&typeof sp.y==="number") place(sp.x*window.innerWidth,sp.y*window.innerHeight); }catch(e){}
+  b.addEventListener("pointerdown",function(e){
+    down=true; moved=false; sx=e.clientX; sy=e.clientY;
+    var r=b.getBoundingClientRect(); ox=r.left; oy=r.top;
+    try{ b.setPointerCapture(e.pointerId); }catch(_){}
+  });
+  b.addEventListener("pointermove",function(e){
+    if(!down) return;
+    var dx=e.clientX-sx, dy=e.clientY-sy;
+    if(!moved && Math.abs(dx)+Math.abs(dy)<8) return;
+    moved=true; b.classList.add("drag"); place(ox+dx,oy+dy); e.preventDefault();
+  });
+  function end(){
+    if(!down) return; down=false; b.classList.remove("drag");
+    if(moved){ var r=b.getBoundingClientRect(); lsSet(KEY,JSON.stringify({x:r.left/window.innerWidth,y:r.top/window.innerHeight})); }
+  }
+  b.addEventListener("pointerup",end); b.addEventListener("pointercancel",end);
+  b.addEventListener("click",function(e){ if(moved){ moved=false; e.preventDefault(); return; } showView('reviews'); });
+  window.addEventListener("resize",function(){ if(b.style.top && b.offsetWidth){ var r=b.getBoundingClientRect(); place(r.left,r.top); } });
+}
+
+function sendOrder(){
+  if(!cart.length){ closeModal("checkoutModal"); return; }
+  var city=$("cityInput").value.trim();
+  if(city.length<2){ toast("Укажите ваш город"); $("cityInput").focus(); return; }
+  var note=$("noteInput").value.trim();
+  var tg=managerFor(city);
+
+  var msg=buildOrderText(city,note);
+  lsSet(CITY_KEY,city);
+  saveOrder(city);
+  try{ copyText(msg,"Текст заказа скопирован"); }catch(e){}
+
+  var url="https://t.me/"+tg+"?text="+encodeURIComponent(msg);
+
+  // списываем со склада и очищаем корзину
+  cart.forEach(function(it){
+    var p=findProduct(it.id);
+    if(p){ p.stock=Math.max(0,p.stock-it.quantity); p.reserved=Math.max(0,p.reserved-it.quantity); }
+  });
+  persistStocks();
+  cart=[]; renderProducts(); updateCart();
+  closeModal("checkoutModal");
+  $("cityInput").value=""; $("noteInput").value="";
+  toast("Открываем Telegram: @"+tg);
+
+  // переход в той же вкладке — надёжнее всего на телефонах (не блокируется)
+  window.location.href=url;
+}
+
+/* ============ СКРЫТАЯ АДМИН-ПАНЕЛЬ ============ */
+function openAdminLogin(){
+  var lock=parseInt(lsGet(LOCK_KEY)||"0",10);
+  if(lock>Date.now()){ toast("Слишком много попыток. Подождите."); return; }
+  $("adminPassword").value="";
+  openModal("passwordModal");
+  setTimeout(function(){ $("adminPassword").focus(); },50);
+}
+var failCount=0;
+function checkPwd(){
+  var val=$("adminPassword").value;
+  if(!val) return;
+  sha256(ADMIN_SALT+val,function(h){
+    if(h===ADMIN_HASH){
+      failCount=0;
+      $("adminPassword").value="";
+      closeModal("passwordModal");
+      renderAdmin(); openModal("adminModal");
+    }else{
+      failCount++;
+      $("adminPassword").value="";
+      if(failCount>=5){
+        lsSet(LOCK_KEY,String(Date.now()+5*60*1000)); failCount=0;
+        closeModal("passwordModal"); toast("Блокировка на 5 минут");
+      }else toast("Неверный пароль");
+    }
+  });
+}
+function renderAdmin(){
+  var html="";
+  products.forEach(function(p){
+    html+='<div class="admin-item"><span class="admin-item-name">'+p.emoji+' '+esc(p.name)+
+      ' <small style="color:#999">(в корзинах: '+p.reserved+')</small></span>'+
+      '<input type="number" inputmode="numeric" class="admin-item-input" id="stock-'+p.id+'" value="'+p.stock+'" min="0" max="999"></div>';
+  });
+  $("adminItems").innerHTML=html;
+}
+function saveStocks(){
+  var errors=[], vals=[];
+  products.forEach(function(p){
+    var n=parseInt($("stock-"+p.id).value,10);
+    vals.push(n);
+    if(isNaN(n)||n<0||n>999) errors.push(p.name+": некорректное значение");
+    else if(n<p.reserved) errors.push(p.name+": не меньше "+p.reserved+" (лежит в корзинах)");
+  });
+  if(errors.length){ toast(errors[0]+(errors.length>1?" (+ещё "+(errors.length-1)+")":"")); return; }
+  products.forEach(function(p,i){ p.stock=vals[i]; });
+  persistStocks(); renderProducts(); closeModal("adminModal"); toast("Запасы обновлены ✓");
+}
+
+/* ============ ИНИЦИАЛИЗАЦИЯ ============ */
+document.addEventListener("DOMContentLoaded",function(){
+  // возраст
+  var ageModal=$("ageModal");
+  if(lsGet(AGE_KEY)!=="1") ageModal.classList.add("active");
+  $("ageYes").addEventListener("click",function(){ lsSet(AGE_KEY,"1"); ageModal.classList.remove("active"); });
+  $("ageNo").addEventListener("click",function(){
+    document.body.innerHTML="<div style='display:flex;align-items:center;justify-content:center;height:100vh;padding:20px;text-align:center;font-family:sans-serif'><h2>Доступ только для лиц старше 18 лет.</h2></div>";
+  });
+
+  loadStocks(); loadFavs(); restoreCart(); loadOrders(); loadRecent(); renderProducts(); updateCart(); renderOrders(); renderRecent();
+
+  // меню
+  var nav=$("navMenu");
+  function goTo(id){
+    var inRv=document.body.classList.contains("view-reviews");
+    if(inRv) showView('shop');
+    setTimeout(function(){ var t=$(id); if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:inRv?"auto":"smooth"}); },inRv?30:0);
+  }
+  $("burgerBtn").addEventListener("click",function(){ nav.classList.toggle("open"); });
+  $("cartIcon").addEventListener("click",function(){ goTo("cart"); });
+
+  // делегирование: каталог и корзина
+  $("productsGrid").addEventListener("click",function(e){
+    var b=e.target.closest(".add-to-cart");
+    if(b){ if(!b.disabled) addToCart(parseInt(b.getAttribute("data-id"),10)); return; }
+    var nt=e.target.closest("[data-notify]");
+    if(nt){ notifyMe(parseInt(nt.getAttribute("data-notify"),10)); return; }
+    var f=e.target.closest(".fav-btn");
+    if(f){ toggleFav(parseInt(f.getAttribute("data-id"),10)); return; }
+    var qv=e.target.closest("[data-quick]");
+    if(qv){ openQuick(parseInt(qv.getAttribute("data-quick"),10)); return; }
+    if(e.target.closest("#resetFiltersBtn")) resetFilters();
+  });
+
+  // поиск, сортировка, фильтры
+  $("searchInput").addEventListener("input",function(){ state.q=this.value; animNext=true; renderProducts(); });
+  $("sortSelect").addEventListener("change",function(){ state.sort=this.value; animNext=true; renderProducts(); });
+  $("chips").addEventListener("click",function(e){
+    var c=e.target.closest(".chip"); if(!c) return;
+    var ac=c.getAttribute("data-action"); if(ac){ chipAction(ac); return; }
+    animNext=true;
+    var cat=c.getAttribute("data-cat"), tg=c.getAttribute("data-toggle");
+    if(cat) state.cat=(state.cat===cat&&cat!=="all")?"all":cat;
+    else if(tg==="stock") state.stockOnly=!state.stockOnly;
+    else if(tg==="fav") state.favOnly=!state.favOnly;
+    renderProducts();
+  });
+
+  // быстрый просмотр
+  $("closeQuick").addEventListener("click",closeQuick);
+  $("quickModal").addEventListener("click",function(e){ if(e.target===this) quickId=null; });
+  $("quickBody").addEventListener("click",function(e){
+    var a=e.target.closest(".qv-add");
+    if(a && !a.disabled){ var id=parseInt(a.getAttribute("data-id"),10); addToCart(id); openQuick(id); return; }
+    var f=e.target.closest(".qv-fav");
+    if(f) toggleFav(parseInt(f.getAttribute("data-id"),10));
+  });
+
+  // эффект капли при нажатии на кнопки
+  var RIPPLE_SEL="button,.btn,.telegram-link,.chip";
+  var RIPPLE_SKIP=".cart-icon,.burger,.close-modal";
+  var lastRip=null;
+  function ripKey(el){
+    return el.tagName+"|"+el.className.replace(/\s*ripple\s*/g,"")+"|"+(el.getAttribute("data-id")||"")+"|"+(el.getAttribute("data-act")||"");
+  }
+  function spawnRipple(el,x,y,size,skipSec){
+    if(getComputedStyle(el).position==="static") el.style.position="relative";
+    el.style.overflow="hidden";
+    var d=document.createElement("span");
+    d.className="ripple";
+    d.style.width=d.style.height=size+"px";
+    d.style.left=(x-size/2)+"px"; d.style.top=(y-size/2)+"px";
+    if(skipSec) d.style.animationDelay=(-skipSec)+"s";
+    el.appendChild(d);
+    var rm=function(){ if(d.parentNode) d.parentNode.removeChild(d); };
+    d.addEventListener("animationend",rm);
+    setTimeout(rm,1000);
+  }
+  function makeRipple(el,clientX,clientY,center){
+    if(el.disabled || el.matches(RIPPLE_SKIP)) return;
+    var r=el.getBoundingClientRect();
+    var size=Math.max(r.width,r.height)*2.2;
+    var x=center?r.width/2:clientX-r.left, y=center?r.height/2:clientY-r.top;
+    spawnRipple(el,x,y,size,0);
+    lastRip={key:ripKey(el),x:x,y:y,size:size,t:Date.now()};
+  }
+  // если кнопка перерисовалась сразу после нажатия (каталог, корзина), капля продолжается на новой кнопке
+  function reRipple(root){
+    if(!lastRip) return;
+    var passed=(Date.now()-lastRip.t)/1000;
+    if(passed>0.65){ lastRip=null; return; }
+    var list=root.querySelectorAll(RIPPLE_SEL);
+    for(var i=0;i<list.length;i++){
+      if(ripKey(list[i])===lastRip.key && !list[i].querySelector(".ripple") && !list[i].disabled){
+        spawnRipple(list[i],lastRip.x,lastRip.y,lastRip.size,passed);
+        lastRip=null; return;
+      }
+    }
+  }
+  if("MutationObserver" in window){
+    ["productsGrid","cartItems","quickBody"].forEach(function(id){
+      var root=$(id);
+      new MutationObserver(function(){ reRipple(root); }).observe(root,{childList:true});
+    });
+  }
+  document.addEventListener("pointerdown",function(e){
+    var el=e.target.closest&&e.target.closest(RIPPLE_SEL);
+    if(el) makeRipple(el,e.clientX,e.clientY,false);
+  });
+  document.addEventListener("click",function(e){
+    if(e.detail!==0) return; // клавиатура: капля в центре кнопки
+    var el=e.target.closest&&e.target.closest(RIPPLE_SEL);
+    if(el) makeRipple(el,0,0,true);
+  });
+
+  // плавающая корзина (телефон) и кнопка «наверх»
+  $("mobileBar").addEventListener("click",function(){ goTo("cart"); });
+  $("backTop").addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+  var scrollTick=false;
+  window.addEventListener("scroll",function(){
+    if(scrollTick) return; scrollTick=true;
+    requestAnimationFrame(function(){ onScrollUpdate(); scrollTick=false; });
+  },{passive:true});
+  function onScrollUpdate(){
+    var y=window.pageYOffset||0;
+    $("backTop").classList.toggle("show",y>700);
+    var max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+    var p=Math.min(1,Math.max(0,y/max));
+    document.documentElement.style.setProperty("--scroll",p.toFixed(3));
+  }
+  onScrollUpdate();
+  $("cartItems").addEventListener("click",function(e){
+    var q=e.target.closest(".quantity-btn");
+    if(q){ changeQty(parseInt(q.getAttribute("data-id"),10),q.getAttribute("data-act")==="inc"?1:-1); return; }
+    var r=e.target.closest(".remove-item");
+    if(r) removeItem(parseInt(r.getAttribute("data-id"),10));
+  });
+  $("clearCartBtn").addEventListener("click",clearCart);
+  $("ordersBox").addEventListener("click",function(e){ var b=e.target.closest("[data-reorder]"); if(b) reorder(parseInt(b.getAttribute("data-reorder"),10)); });
+  $("recentBox").addEventListener("click",function(e){ var b=e.target.closest("[data-quick]"); if(b) openQuick(parseInt(b.getAttribute("data-quick"),10)); });
+  $("checkoutBtn").addEventListener("click",openCheckout);
+
+  // заказ
+  $("closeCheckout").addEventListener("click",function(){ closeModal("checkoutModal"); });
+  $("cityInput").addEventListener("input",updateRouteInfo);
+  $("cityInput").addEventListener("keydown",function(e){ if(e.key==="Enter") sendOrder(); });
+  $("sendOrderBtn").addEventListener("click",sendOrder);
+  $("copyOrderBtn").addEventListener("click",copyOrder);
+
+  // feedback
+  loadMine(); renderReviews(); loadRemote();
+  if(location.hash==='#reviews') showView('reviews');
+  $("rvBack").addEventListener("click",function(){ showView('shop'); });
+  renderStars();
+  $("stars").addEventListener("click",function(e){
+    var b=e.target.closest(".star"); if(!b) return;
+    var v=parseInt(b.getAttribute("data-v"),10);
+    fbRating=(fbRating===v)?0:v; renderStars();
+  });
+  $("fbSend").addEventListener("click",sendFeedback);
+  initDragFeedback();
+
+  // админка
+  $("closePwd").addEventListener("click",function(){ closeModal("passwordModal"); });
+  $("checkPwdBtn").addEventListener("click",checkPwd);
+  $("adminPassword").addEventListener("keydown",function(e){ if(e.key==="Enter") checkPwd(); });
+  $("closeAdmin").addEventListener("click",function(){ closeModal("adminModal"); });
+  $("saveStocksBtn").addEventListener("click",saveStocks);
+
+  // скрытые способы входа: 7 нажатий на логотип / Ctrl+Shift+A / ссылка с #zx-panel
+  var taps=0, tapTimer;
+  $("logo").addEventListener("click",function(e){
+    taps++; clearTimeout(tapTimer); tapTimer=setTimeout(function(){ taps=0; },2500);
+    if(taps>=7){ taps=0; e.preventDefault(); openAdminLogin(); }
+  });
+  document.addEventListener("keydown",function(e){
+    if(e.ctrlKey && e.shiftKey && (e.key==="A"||e.key==="a")){ e.preventDefault(); openAdminLogin(); }
+    if(e.key==="/" && !/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||"") && !document.body.classList.contains("view-reviews")){ e.preventDefault(); $("searchInput").focus(); }
+    if(e.key==="Escape"){ ["checkoutModal","passwordModal","adminModal"].forEach(closeModal); closeQuick(); }
+  });
+  if(location.hash==="#zx-panel"){
+    history.replaceState(null,"",location.pathname+location.search);
+    openAdminLogin();
+  }
+
+  // закрытие по фону (кроме возраста)
+  Array.prototype.forEach.call(document.querySelectorAll(".modal-overlay"),function(o){
+    if(o.id==="ageModal") return;
+    o.addEventListener("click",function(e){ if(e.target===o) o.classList.remove("active"); });
+  });
+
+  // плавная прокрутка по якорям
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'),function(a){
+    a.addEventListener("click",function(e){
+      var href=a.getAttribute("href"); nav.classList.remove("open");
+      if(href==="#reviews"||href==="#feedback"){ e.preventDefault(); showView('reviews'); return; }
+      if(href==="#"||href==="#top"){ e.preventDefault(); if(document.body.classList.contains("view-reviews")) showView('shop'); else window.scrollTo({top:0,behavior:"smooth"}); return; }
+      var t=document.querySelector(href);
+      if(t){ e.preventDefault(); goTo(href.slice(1)); }
+    });
+  });
+
+  // клик по карточке Telegram
+  Array.prototype.forEach.call(document.querySelectorAll(".telegram-contact"),function(c){
+    c.addEventListener("click",function(e){
+      if(e.target.closest(".telegram-link")) return;
+      var u=c.getAttribute("data-contact");
+      if(u) window.open("https://t.me/"+u,"_blank","noopener");
+    });
+  });
+
+  // появление блоков при прокрутке
+  var els=document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    },{threshold:.12});
+    Array.prototype.forEach.call(els,function(el){ io.observe(el); });
+  }else{
+    Array.prototype.forEach.call(els,function(el){ el.classList.add("in"); });
+  }
+});
+})();
+</script>
+</body>
+</html>
